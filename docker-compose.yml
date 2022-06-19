@@ -1,0 +1,20 @@
+version: "3.1" 
+services:
+  dovecot:
+    image: thehelpfulidiot/dovecot:latest
+    container_name: dovecot
+    ports:
+      - "993:993"
+    volumes:
+      - /home/jonathan/dovecot-test/ssl:/ssl
+      - /home/jonathan/dovecot-test/mail:/mail
+      - /home/jonathan/dovecot-test/logs:/var/log/dovecot
+    environment:
+      - email_username=bob
+      - email_password=odenkirk
+      - PUID=1000
+      - disable_plaintext_auth=no
+      - ssl_cert=fullchain1.pem
+      - ssl_key=privkey1.pem
+      - ssl=required
+      - server_address=imap.boob.com
