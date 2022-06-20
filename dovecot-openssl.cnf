@@ -16,7 +16,7 @@ x509_extensions         = v3_req
 [ req_distinguished_name ]
 organizationName = Dovecot mail server
 organizationalUnitName = @commonName@
-commonName = {server_address}
+commonName = ${server_address}
 emailAddress = @emailAddress@
 
 [ v3_req ]
