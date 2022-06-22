@@ -10,6 +10,8 @@ https://www.dovecot.org/
 
 This container was designed to be configured through environment variables. If you want to configure the application beyond those, you can always mount the following two directories, and manually edit the configuration files.
 
+```
 /etc/dovecot
 
 /usr/share/dovecot
+```
