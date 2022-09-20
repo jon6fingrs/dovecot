@@ -28,6 +28,8 @@ COPY dovecot-openssl.cnf /usr/share/dovecot/dovecot-openssl.cnf
 COPY 10-mail.conf /etc/dovecot/conf.d/10-mail.conf
 RUN mkdir /ssl
 RUN mkdir /mail
+RUN chmod 777 -R /ssl
+RUN chmod 777 -R /mail
 VOLUME /ssl /mail /var/log/dovecot
 # VOLUME /etc/dovecot /usr/share/dovecot 
 
