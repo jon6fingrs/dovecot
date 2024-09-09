@@ -10,3 +10,16 @@
   doveadm log reopen
   endscript
 }
+
+/var/log/dovecot-info.log {
+  weekly
+  rotate 4
+  missingok
+  notifempty
+  compress
+  delaycompress
+  sharedscripts
+  postrotate
+  doveadm log reopen
+  endscript
+}
