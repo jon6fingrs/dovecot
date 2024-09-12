@@ -1,18 +1,12 @@
-FROM ubuntu:latest
+FROM ubuntu:focal
 
-RUN apt update && apt upgrade -y
-RUN apt install -y dovecot-imapd
-RUN apt install -y openssl
-RUN apt install -y ca-certificates nano curl gpg apt-transport-https
+RUN apt update && apt upgrade -y && apt install -y openssl ca-certificates nano curl gpg apt-transport-https
 
 RUN mkdir -p /etc/apt/keyrings; curl https://repo.dovecot.org/DOVECOT-REPO-GPG | gpg --import
 RUN gpg --export ED409DA1 > /etc/apt/keyrings/dovecot.gpg
 RUN echo "deb [signed-by=/etc/apt/keyrings/dovecot.gpg] https://repo.dovecot.org/ce-2.3-latest/ubuntu/focal focal main" >> /etc/apt/sources.list.d/dovecot.list
 
-RUN apt update
-
-RUN apt install -y dovecot-imapd
-RUN apt install -y dovecot-solr
+RUN apt update && apt install -y dovecot-imapd dovecot-solr
 
 RUN touch /var/log/dovecot-info.log
 RUN touch /var/log/dovecot.log
