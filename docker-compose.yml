@@ -13,7 +13,7 @@ services:
       - email_username=bob # username when connecting to this local server
       - email_password=odenkirk # password when connecting to this local server
       - PUID=1000 # needed for mailbox to have proper conditions
-      - disable_plaintext_auth=no
+      - disable_plaintext_auth=no #default is no
       - ssl_cert=chain.pem # not needed if ssl set to no
       - ssl_key=key.pem #not needed if ssl set to no
       - ssl=required #required, yes, or no
