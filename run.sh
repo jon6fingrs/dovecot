@@ -15,7 +15,12 @@ chmod 774 -R /ssl
 chmod 774 -R /mail
 
 if [[ $disable_plaintext_auth != "yes" ]]; then export disable_plaintext_auth=no; fi
-if [[ $ssl != "yes" && $ssl !=  "required" ]]; then export ssl=no; fi
+if [[ $ssl != "yes" && $ssl !=  "required" ]]
+then
+  export ssl=no
+  sed -i "s/ssl_cert = </#ssl_cert = </g" /etc/dovecot/conf.d/10-ssl.conf
+  sed -i "s/ssl_key = </#ssl_key = </g" /etc/dovecot/conf.d/10-ssl.conf
+fi
 
 sed -i "s/{ssl_cert}/${ssl_cert}/g" /etc/dovecot/conf.d/10-ssl.conf
 sed -i "s/{ssl_key}/${ssl_key}/g" /etc/dovecot/conf.d/10-ssl.conf
@@ -31,5 +36,7 @@ then
     echo "Creating dh.pem file"
     openssl dhparam 4096 > /etc/dovecot/dh.pem
   fi
+else
+  sed -i "s/ssl_dh = </#ssl_dh = </g" /etc/dovecot/conf.d/10-ssl.conf
 fi
 dovecot -F
