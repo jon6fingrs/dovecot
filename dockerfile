@@ -3,7 +3,15 @@ FROM ubuntu:latest
 RUN apt update && apt upgrade -y
 RUN apt install -y dovecot-imapd
 RUN apt install -y openssl
-RUN apt install -y ca-certificates nano
+RUN apt install -y ca-certificates nano curl gpg apt-transport-https
+
+RUN mkdir -p /etc/apt/keyrings; curl https://repo.dovecot.org/DOVECOT-REPO-GPG | gpg --import
+RUN gpg --export ED409DA1 > /etc/apt/keyrings/dovecot.gpg
+RUN echo "deb [signed-by=/etc/apt/keyrings/dovecot.gpg] https://repo.dovecot.org/ce-2.3-latest/ubuntu/focal focal main" >> /etc/apt/sources.list.d/dovecot.list
+
+RUN apt update
+
+RUN apt install -y dovecot-imapd
 RUN apt install -y dovecot-solr
 
 RUN touch /var/log/dovecot-info.log
@@ -26,6 +34,7 @@ COPY 10-master.conf /etc/dovecot/conf.d/10-master.conf
 
 RUN mkdir /ssl
 RUN mkdir /mail
+#RUN mkdir /mail/Important
 #RUN chmod 777 -R /ssl
 RUN chmod 777 -R /mail
 VOLUME /ssl /mail /var/log/dovecot
@@ -35,4 +44,4 @@ EXPOSE 993
 
 COPY run.sh /run.sh
 RUN chmod +x /run.sh
-ENTRYPOINT ["/run.sh"]
+CMD ["/run.sh"]
