@@ -8,3 +8,6 @@ If using dh_pem, it will take a while (took like 10 minutes for me) when it firs
 9/12/2024 - Updated dovecot to latest version and cleaned up the startup script a bit.
 
 https://hub.docker.com/repository/docker/thehelpfulidiot/dovecot/general
+
+See how to combine mbsync (clone remote mailbox), dovecot (serve mailbox as local IMAP server), and solr (index mailbox for better searching):
+https://github.com/jon6fingrs/mbsync-dovecot
