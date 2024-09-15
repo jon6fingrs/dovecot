@@ -19,3 +19,16 @@ services:
       - ssl=required #required, yes, or no
       - server_address=imap.server.local # address by which your local server will be reachable
       - dh_pem=yes # yes or no, creating the file can take a while
+
+
+  solr: #dovecot will produce errors if solr is not found
+    image: thehelpfulidiot/solr:latest
+    container_name: solr
+#    ports:
+#      - "8983:8983"
+    volumes:
+      - solr-data:/var/solr/data/dovecot/data/index
+    restart: always
+
+volumes:
+  solr-data:
