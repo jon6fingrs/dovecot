@@ -13,13 +13,13 @@ services:
       - email_username=bob # username when connecting to this local server
       - email_password=odenkirk # password when connecting to this local server
       - PUID=1000 # needed for mailbox to have proper conditions
-      - disable_plaintext_auth=no #default is no
+      - auth_allow_cleartext=no #default is no
       - ssl_cert=chain.pem # not needed if ssl set to no
       - ssl_key=key.pem #not needed if ssl set to no
       - ssl=required #required, yes, or no
       - server_address=imap.server.local # address by which your local server will be reachable
       - dh_pem=yes # yes or no, creating the file can take a while
-
+      - TZ=America/New_York
 
   solr: #dovecot will produce errors if solr is not found
     image: thehelpfulidiot/solr:latest
