@@ -7,12 +7,6 @@ RUN echo "deb [signed-by=/usr/share/keyrings/dovecot.gpg] https://repo.dovecot.o
 
 RUN apt update && apt install -y dovecot-imapd dovecot-solr
 
-RUN touch /var/log/dovecot-info.log
-RUN touch /var/log/dovecot.log
-RUN ln -sf /dev/stdout /var/log/dovecot-info.log \
-        && ln -sf /dev/stderr /var/log/dovecot.log
-COPY log-rotate /etc/logrotate.d/dovecot
-COPY log-rotate-info /etc/logrotate.d/dovecot-info
 
 # COPY etc/conf.d/10-mail.conf /etc/dovecot/conf.d/10-mail.conf
 COPY 15-mailboxes.conf /etc/dovecot/conf.d/15-mailboxes.conf
